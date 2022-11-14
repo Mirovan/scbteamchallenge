@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="inc/head.inc::head"></head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:replace="inc/top_nav.inc::top_nav"></nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-10">
+            <div class="chart-box">
+                <div id="chart-candlestick"></div>
+                <div id="chart-bar"></div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <table id="stakan" class="table table-striped" style="font-size: 12px;"></table>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer th:replace="inc/footer.inc::footer"></footer>
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="inc/js.inc::js"></div>
+
+<script src="/static/default/js/terminal.js"></script>
+<script src="/static/default/js/ohlc.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+</body>
+
+</html>
