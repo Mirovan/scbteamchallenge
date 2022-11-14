@@ -49,8 +49,8 @@ public class OrderServiceImpl implements OrderService {
         int koef = direction == Direction.BUY ? -1 : 1;
 
         //Отклонение в процентах от цены lastPrice
-        Double rndPercent = 100 + Util.getRandomNumber(1, 50) * 0.01 * koef;
-        BigDecimal price = BigDecimal.valueOf(lastPrice * rndPercent / 100).setScale(4, RoundingMode.CEILING);
+        Double rndPercent = 100 + koef * Util.getRandomNumber(1, 5000) / 10000d;
+        BigDecimal price = BigDecimal.valueOf(lastPrice * rndPercent / 100).setScale(3, RoundingMode.CEILING);
 
         return new Offer(tiker, price, Util.getRandomNumber(1, 100), direction);
     }

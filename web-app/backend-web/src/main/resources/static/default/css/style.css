@@ -16,6 +16,12 @@ footer {
     background: #7fee81;
 }
 
-#stakan tr td {
+#stakan-table tbody, td, tfoot, th, thead, tr {
+    border: none;
+}
+#stakan-table th {
+    background: #c4c4c4;
+}
+#stakan-table tr td {
     padding: 0 4px;
 }

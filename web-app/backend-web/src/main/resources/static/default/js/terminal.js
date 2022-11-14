@@ -3,7 +3,9 @@ $(function () {
     setInterval(loadOrderBook, 500);
 });
 
-
+/**
+ * Запрос на получение фооеров для стакана
+ * */
 function loadOrderBook() {
     $.get("/api/orderbook", {tiker: "USDRUB_TOM"})
         .done(function (data) {
@@ -14,19 +16,25 @@ function loadOrderBook() {
 }
 
 
+/**
+ * Отображение офферов в стакане
+ * */
 function makeStakanData(orders) {
     let tableData = "";
     for (let item in orders) {
         let type = orders[item]["direction"] == "BUY" ? "bid" : "ask";
         tableData += "<tr class='" + type + "'>" +
             "<td>" + orders[item]["price"] + "</td>" +
-            "<td>" + orders[item]["lot"] + "</td>" +
+            "<td>" + orders[item]["volume"] + "</td>" +
             "</tr>";
     }
     return tableData;
 }
 
 
+/**
+ * Построение графика цены
+ * */
 function makeChart() {
     var options = {
         series: [{
