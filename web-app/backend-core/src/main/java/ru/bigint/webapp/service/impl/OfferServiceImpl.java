@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.bigint.webapp.dto.Direction;
 import ru.bigint.webapp.dto.Offer;
 import ru.bigint.webapp.dto.Tiker;
-import ru.bigint.webapp.service.iface.OrderService;
+import ru.bigint.webapp.service.iface.OfferService;
 import ru.bigint.webapp.utils.Util;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OfferServiceImpl implements OfferService {
 
     int ordersCount = 100;
     private Double lastPrice = 65.0000;
@@ -37,14 +37,14 @@ public class OrderServiceImpl implements OrderService {
 
         //Формируем заявки на покупку и продажу
         for (int i = 0; i < ordersCount; i++) {
-            list.add(makeOrder(tiker, lastPrice, Direction.BUY));
-            list.add(makeOrder(tiker, lastPrice, Direction.SELL));
+            list.add(makeOffer(tiker, lastPrice, Direction.BUY));
+            list.add(makeOffer(tiker, lastPrice, Direction.SELL));
         }
 
         return list;
     }
 
-    private Offer makeOrder(Tiker tiker, Double lastPrice, Direction direction) {
+    private Offer makeOffer(Tiker tiker, Double lastPrice, Direction direction) {
         //Коэфициент определяющий направление отклонения от цены
         int koef = direction == Direction.BUY ? -1 : 1;
 

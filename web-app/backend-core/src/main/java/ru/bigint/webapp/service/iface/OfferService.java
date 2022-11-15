@@ -5,7 +5,7 @@ import ru.bigint.webapp.dto.Offer;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface OrderService {
+public interface OfferService {
     /**
      * Получить все заявки по текущему времени
      * */

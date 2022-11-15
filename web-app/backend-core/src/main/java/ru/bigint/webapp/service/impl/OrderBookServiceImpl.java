@@ -5,7 +5,7 @@ import ru.bigint.webapp.dto.Direction;
 import ru.bigint.webapp.dto.Offer;
 import ru.bigint.webapp.dto.OrderBook;
 import ru.bigint.webapp.service.iface.OrderBookService;
-import ru.bigint.webapp.service.iface.OrderService;
+import ru.bigint.webapp.service.iface.OfferService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     private int orderBookDepth = 20;
 
-    private final OrderService orderService;
+    private final OfferService offerService;
 
-    public OrderBookServiceImpl(OrderService orderService) {
-        this.orderService = orderService;
+    public OrderBookServiceImpl(OfferService offerService) {
+        this.offerService = offerService;
     }
 
     @Override
     public OrderBook getOrderBook(String tiker) {
-        List<Offer> offers = orderService.getLastOrders();
+        List<Offer> offers = offerService.getLastOrders();
 
         return new OrderBook(createOrderBookItems(offers));
     }
