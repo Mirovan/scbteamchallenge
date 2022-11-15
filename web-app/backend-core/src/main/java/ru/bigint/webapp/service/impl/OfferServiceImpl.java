@@ -2,7 +2,7 @@ package ru.bigint.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.bigint.webapp.dto.Direction;
-import ru.bigint.webapp.dto.Offer;
+import ru.bigint.webapp.dto.OrderBookOffer;
 import ru.bigint.webapp.dto.Tiker;
 import ru.bigint.webapp.service.iface.OfferService;
 import ru.bigint.webapp.utils.Util;
@@ -20,14 +20,14 @@ public class OfferServiceImpl implements OfferService {
     private Double lastPrice = 65.0000;
 
     @Override
-    public List<Offer> getLastOrders() {
-        return getOrdersByTime(LocalDateTime.now());
+    public List<OrderBookOffer> getActualOffers() {
+        return getOffersByTime(LocalDateTime.now());
     }
 
     @Override
-    public List<Offer> getOrdersByTime(LocalDateTime ldt) {
+    public List<OrderBookOffer> getOffersByTime(LocalDateTime ldt) {
         //На основе текущего курса генерируем синтетические данные
-        List<Offer> list = new ArrayList<>();
+        List<OrderBookOffer> list = new ArrayList<>();
 
         Tiker tiker = new Tiker("USDRUB_TOM - USD/РУБ",
                 "USDRUB_TOM",
@@ -44,7 +44,7 @@ public class OfferServiceImpl implements OfferService {
         return list;
     }
 
-    private Offer makeOffer(Tiker tiker, Double lastPrice, Direction direction) {
+    private OrderBookOffer makeOffer(Tiker tiker, Double lastPrice, Direction direction) {
         //Коэфициент определяющий направление отклонения от цены
         int koef = direction == Direction.BUY ? -1 : 1;
 
@@ -52,6 +52,6 @@ public class OfferServiceImpl implements OfferService {
         Double rndPercent = 100 + koef * Util.getRandomNumber(1, 5000) / 10000d;
         BigDecimal price = BigDecimal.valueOf(lastPrice * rndPercent / 100).setScale(3, RoundingMode.CEILING);
 
-        return new Offer(tiker, price, Util.getRandomNumber(1, 100), direction);
+        return new OrderBookOffer(tiker, price, Util.getRandomNumber(1, 100), direction);
     }
 }

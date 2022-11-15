@@ -25,3 +25,22 @@ footer {
 #stakan-table tr td {
     padding: 0 4px;
 }
+
+#table-orders tr th {
+    font-size: 12px;
+    background: #c4c4c4;
+}
+
+#user-orders tr td {
+    font-size: 12px;
+}
+
+#table-trades tr th {
+    font-size: 12px;
+    background: #c4c4c4;
+}
+
+
+#user-trades tr td {
+    font-size: 12px;
+}

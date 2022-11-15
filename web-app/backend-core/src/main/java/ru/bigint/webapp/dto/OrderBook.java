@@ -7,17 +7,17 @@ import java.util.List;
  */
 public class OrderBook {
     //Заявки
-    private List<Offer> offers;
+    private List<OrderBookOffer> orderBookOffers;
 
-    public OrderBook(List<Offer> offers) {
-        this.offers = offers;
+    public OrderBook(List<OrderBookOffer> orderBookOffers) {
+        this.orderBookOffers = orderBookOffers;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
+    public List<OrderBookOffer> getOffers() {
+        return orderBookOffers;
     }
 
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
+    public void setOffers(List<OrderBookOffer> orderBookOffers) {
+        this.orderBookOffers = orderBookOffers;
     }
 }

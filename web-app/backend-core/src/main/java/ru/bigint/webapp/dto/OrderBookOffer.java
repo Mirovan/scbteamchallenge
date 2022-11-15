@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Заявки от участников ФР
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Offer {
+public class OrderBookOffer {
     //Тикер
     private Tiker tiker;
     //Цена
@@ -21,17 +21,17 @@ public class Offer {
     //Направление заявки - покупка или продажа
     private Direction direction;
 
-    public Offer() {
+    public OrderBookOffer() {
     }
 
-    public Offer(Tiker tiker, BigDecimal price, Integer volume, Direction direction) {
+    public OrderBookOffer(Tiker tiker, BigDecimal price, Integer volume, Direction direction) {
         this.tiker = tiker;
         this.price = price;
         this.volume = volume;
         this.direction = direction;
     }
 
-    public Offer(BigDecimal price, Integer volume, Direction direction) {
+    public OrderBookOffer(BigDecimal price, Integer volume, Direction direction) {
         this.price = price;
         this.volume = volume;
         this.direction = direction;

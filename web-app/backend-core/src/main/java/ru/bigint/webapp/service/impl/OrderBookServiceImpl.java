@@ -2,7 +2,7 @@ package ru.bigint.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.bigint.webapp.dto.Direction;
-import ru.bigint.webapp.dto.Offer;
+import ru.bigint.webapp.dto.OrderBookOffer;
 import ru.bigint.webapp.dto.OrderBook;
 import ru.bigint.webapp.service.iface.OrderBookService;
 import ru.bigint.webapp.service.iface.OfferService;
@@ -27,40 +27,40 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     @Override
     public OrderBook getOrderBook(String tiker) {
-        List<Offer> offers = offerService.getLastOrders();
+        List<OrderBookOffer> orderBookOffers = offerService.getActualOffers();
 
-        return new OrderBook(createOrderBookItems(offers));
+        return new OrderBook(createOrderBookItems(orderBookOffers));
     }
 
-    private List<Offer> createOrderBookItems(List<Offer> list) {
+    private List<OrderBookOffer> createOrderBookItems(List<OrderBookOffer> list) {
         //объединяем по ценам офферы
-        Map<BigDecimal, List<Offer>> map = list.stream()
-                .collect(Collectors.groupingBy(Offer::getPrice));
+        Map<BigDecimal, List<OrderBookOffer>> map = list.stream()
+                .collect(Collectors.groupingBy(OrderBookOffer::getPrice));
 
-        List<Offer> offers = map.entrySet().stream()
+        List<OrderBookOffer> orderBookOffers = map.entrySet().stream()
                 .map(item -> {
                     BigDecimal price = item.getKey();
                     Integer lot = item.getValue().stream()
-                            .map(Offer::getVolume)
+                            .map(OrderBookOffer::getVolume)
                             .mapToInt(Integer::intValue).sum();
                     Direction dir = item.getValue().stream().findAny().get().getDirection();
-                    return new Offer(price, lot, dir);
+                    return new OrderBookOffer(price, lot, dir);
                 })
                 .toList();
 
-        List<Offer> asks = offers.stream()
+        List<OrderBookOffer> asks = orderBookOffers.stream()
                 .filter(item -> item.getDirection() == Direction.SELL)
-                .sorted(Comparator.comparing(Offer::getPrice).reversed())
+                .sorted(Comparator.comparing(OrderBookOffer::getPrice).reversed())
                 .toList();
         asks = asks.subList(asks.size() - orderBookDepth, asks.size());
 
-        List<Offer> bids = offers.stream()
+        List<OrderBookOffer> bids = orderBookOffers.stream()
                 .filter(item -> item.getDirection() == Direction.BUY)
-                .sorted(Comparator.comparing(Offer::getPrice).reversed())
+                .sorted(Comparator.comparing(OrderBookOffer::getPrice).reversed())
                 .toList();
         bids = bids.subList(0, orderBookDepth);
 
-        List<Offer> res = new ArrayList<>();
+        List<OrderBookOffer> res = new ArrayList<>();
         res.addAll(asks);
         res.addAll(bids);
 

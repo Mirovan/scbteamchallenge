@@ -12,7 +12,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-10">
+        <div class="col-8">
             <div class="chart-box">
                 <div id="chart-candlestick"></div>
                 <div id="chart-bar"></div>
@@ -20,16 +20,111 @@
         </div>
 
         <div class="col-2">
-            <table id="stakan-table" class="table table-striped" style="font-size: 12px;">
+            <div class="row">
+                <table id="stakan-table" class="table table-striped" style="font-size: 12px;">
+                    <thead>
+                    <tr>
+                        <th>Цена</th>
+                        <th style="width: 75px;">Объем</th>
+                    </tr>
+                    </thead>
+                    <tbody id="stakan"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+                <strong>Инструмент</strong>
+                <div class="input-group input-group-sm mb-3">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Инструмент</option>
+                        <option value="USD000UTSTOM">USDRUB_TOM</option>
+                        <option value="USD000UTSTOM">EURRUB_TOM</option>
+                    </select>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Таймфрейм</option>
+                        <option value="1">1 минута</option>
+                        <option value="10">10 минут</option>
+                        <option value="30">30 минут</option>
+                        <option value="60">60 минут</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <strong>Ввод заявки</strong>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="order-price-group">Цена</span>
+                    <input id="order-price" type="text" class="form-control" aria-describedby="order-price-group">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" id="order-volume-group">Объем</span>
+                    <input id="order-volume" type="text" class="form-control" aria-describedby="order-volume-group">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                               value="option1" checked>
+                        <label class="form-check-label" for="inlineRadio1" style="font-size: 12px;">Покупка</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                               value="option2">
+                        <label class="form-check-label" for="inlineRadio2" style="font-size: 12px;">Продажа</label>
+                    </div>
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <button type="button" class="btn btn-primary">Ввод заявки</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <strong>Заявки</strong>
+            <table id="table-orders" class="table table-striped">
                 <thead>
-                <tr>
+                <tr class="bg-secondary">
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Инструмент</th>
+                    <th>Операция</th>
                     <th>Цена</th>
-                    <th style="width: 75px;">Объем</th>
+                    <th>Кол-во</th>
+                    <th>Объем</th>
+                    <th>Состояние</th>
                 </tr>
                 </thead>
-                <tbody id="stakan"></tbody>
+                <tbody id="user-orders"></tbody>
             </table>
         </div>
+
+        <div class="col-6">
+            <strong>Сделки</strong>
+            <table id="table-trades" class="table table-striped">
+                <thead>
+                <tr class="bg-secondary">
+                    <th>#</th>
+                    <th>Дата</th>
+                    <th>Инструмент</th>
+                    <th>Операция</th>
+                    <th>Цена</th>
+                    <th>Кол-во</th>
+                    <th>Объем</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
     </div>
 
 </div>

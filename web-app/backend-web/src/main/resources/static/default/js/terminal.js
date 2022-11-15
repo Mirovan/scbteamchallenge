@@ -1,5 +1,6 @@
 $(function () {
     showChart();
+    showUserOrders();
     setInterval(loadOrderBook, 500);
 });
 
@@ -188,4 +189,31 @@ function makeChart(data) {
     //
     // var chartBar = new ApexCharts(document.querySelector("#chart-bar"), optionsBar);
     // chartBar.render();
+}
+
+
+/**
+ * Загрузка данных о заявках пользователя
+ * */
+function showUserOrders() {
+    $.get("/api/user-orders")
+        .done(function (data) {
+            let tableData = "";
+
+            for (let item in data) {
+                tableData +=
+                    "<tr>" +
+                    "<td>" + data[item]["id"] + "</td>" +
+                    "<td>" + data[item]["dateTime"] + "</td>" +
+                    "<td>" + data[item]["tiker"] + "</td>" +
+                    "<td>" + data[item]["operation"] + "</td>" +
+                    "<td>" + data[item]["price"] + "</td>" +
+                    "<td>" + data[item]["lot"] + "</td>" +
+                    "<td>" + data[item]["volume"] + "</td>" +
+                    "<td>" + data[item]["status"] + "</td>" +
+                    "</tr>"
+            }
+
+            $("#user-orders").html(tableData);
+        });
 }
