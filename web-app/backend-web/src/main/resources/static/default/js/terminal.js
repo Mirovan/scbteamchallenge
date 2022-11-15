@@ -1,7 +1,12 @@
+let chart = null;
+
 $(function () {
-    showChart();
     showUserOrders();
-    setInterval(loadOrderBook, 500);
+    showChart();
+    loadOrderBook();
+
+    setInterval(showChart, 3000);
+    setInterval(loadOrderBook, 700);
 });
 
 
@@ -48,28 +53,36 @@ function showChart() {
  * Построение графика цены
  * */
 function makeChart(data) {
-    // let xStart = null;
-    // let xEnd = null;
-    // let yStart = 99999999;
-    // let yEnd = 0;
+    let xMin = null;
+    let xMax = null;
+    let yMin = 99999999;
+    let yMax = 0;
 
     //Формируем данные
     let seriesData = [];
     for (let item in data) {
         let xData = Date.parse(data[item]["begin"]);
 
-        // if (xStart == null) xStart = xData;
-        // xEnd = xData;
-        // yStart = Math.min(yStart, data[item]["low"]);
-        // yEnd = Math.max(yEnd, data[item]["high"]);
+        if (xMin == null) xMin = xData;
+        xMax = xData;
+        yMin = Math.min(yMin, data[item]["low"]);
+        yMax = Math.max(yMax, data[item]["high"]);
 
         let yData = [data[item]["open"], data[item]["high"], data[item]["low"], data[item]["close"]];
         seriesData.push({x: xData, y: yData});
     }
 
+    //Обновляем дат границ
+    // xMax = addMinutes(new Date(xMax), 30);
+    yMin = parseInt(yMin * 100) / 100;
+    yMax = parseInt(yMax * 100) / 100;
+    // console.log(yMin);
+    // console.log(yMax);
+
     //Свечной график
     let options = {
         series: [{
+            name: 'candles',
             data: seriesData
         }],
         chart: {
@@ -96,7 +109,15 @@ function makeChart(data) {
             type: 'datetime',
             labels: {
                 datetimeUTC: false
-            }
+            },
+        },
+        yaxis: {
+            decimalsInFloat: 4,
+            min: yMin,
+            max: yMax,
+            tickAmount: 4
+            // min: parseFloat(yMin).toFixed(4),
+            // max: parseFloat(yMax).toFixed(4)
         },
         tooltip: {
             custom: function ({series, seriesIndex, dataPointIndex, w}) {
@@ -119,8 +140,17 @@ function makeChart(data) {
         }
     };
 
-    let chart = new ApexCharts(document.querySelector("#chart-candlestick"), options);
-    chart.render();
+    if (chart == null) {
+        chart = new ApexCharts(document.querySelector("#chart-candlestick"), options);
+        chart.render();
+    } else {
+        chart.updateOptions({
+            series: [{
+                name: 'candles',
+                data: seriesData
+            }]
+        });
+    }
 
     // let optionsBar = {
     //     series: [{
@@ -216,4 +246,13 @@ function showUserOrders() {
 
             $("#user-orders").html(tableData);
         });
+}
+
+
+function addMinutes(date, minutes) {
+    const dateCopy = new Date(date.getTime());
+
+    dateCopy.setTime(dateCopy.getTime() + minutes * 60 * 1000);
+
+    return dateCopy;
 }
