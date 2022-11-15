@@ -122,18 +122,13 @@ function makeChart(data) {
         tooltip: {
             custom: function ({series, seriesIndex, dataPointIndex, w}) {
                 let tooltipData = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-                let dateFormat = new Date(tooltipData.x);
-                let dateTime = dateFormat.getDate() +
-                    "." + (dateFormat.getMonth() + 1) +
-                    "." + dateFormat.getFullYear() +
-                    " " + dateFormat.getHours() +
-                    ":" + dateFormat.getMinutes();
+                let dateTime = getDate(tooltipData.x);
 
                 return '<ul>' +
-                    '<li><b>Open</b>: ' + tooltipData.y[0] + '</li>' +
-                    '<li><b>High</b>: ' + tooltipData.y[1] + '</li>' +
-                    '<li><b>Low</b>: ' + tooltipData.y[2] + '</li>' +
-                    '<li><b>Close</b>: ' + tooltipData.y[3] + '</li>' +
+                    '<li><b>Open</b>: ' + parseFloat(tooltipData.y[0]).toFixed(4) + '</li>' +
+                    '<li><b>High</b>: ' + parseFloat(tooltipData.y[1]).toFixed(4) + '</li>' +
+                    '<li><b>Low</b>: ' + parseFloat(tooltipData.y[2]).toFixed(4) + '</li>' +
+                    '<li><b>Close</b>: ' + parseFloat(tooltipData.y[3]).toFixed(4) + '</li>' +
                     '<li><b>Date</b>: ' + dateTime + '</li>' +
                     '</ul>';
             }
@@ -255,4 +250,24 @@ function addMinutes(date, minutes) {
     dateCopy.setTime(dateCopy.getTime() + minutes * 60 * 1000);
 
     return dateCopy;
+}
+
+
+function getDate(dateTime) {
+    let dateFormat = new Date(dateTime);
+    let date = dateFormat.getDate();
+    if (date.toString().length < 2) date = "0" + date;
+    let month = dateFormat.getMonth() + 1;
+    if (month.toString().length < 2) month = "0" + month;
+    let year = dateFormat.getFullYear();
+    let hours = dateFormat.getHours();
+    if (hours.toString().length < 2) hours = "0" + hours;
+    let minutes = dateFormat.getMinutes();
+    if (minutes.toString().length < 2) minutes = "0" + minutes;
+
+    return date +
+        "." + month +
+        "." + year +
+        " " + hours +
+        ":" + minutes;
 }

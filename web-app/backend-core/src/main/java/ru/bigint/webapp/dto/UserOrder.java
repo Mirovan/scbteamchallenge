@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class UserOrder {
     private Integer id;
     //Время заявки
-    private LocalDateTime dateTime;
+    private LocalDateTime createdAt;
     //Краткое название
     private String tiker;
     //Операция
@@ -34,12 +34,12 @@ public class UserOrder {
         this.id = id;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getTiker() {

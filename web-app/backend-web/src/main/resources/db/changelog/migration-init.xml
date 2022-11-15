@@ -8,6 +8,31 @@
 
     <changeSet id="init" author="milovanov">
 
+        <!--Заявки пользователя-->
+        <createTable tableName="user_orders">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tiker" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operation" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lot" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

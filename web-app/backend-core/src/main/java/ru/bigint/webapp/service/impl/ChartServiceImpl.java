@@ -24,6 +24,7 @@ public class ChartServiceImpl implements ChartService {
     @Override
     public List<Candle> getChart(String tiker, Integer timeframe) {
 
+        //Запрашиваем исторические свечи только один раз, далее берем из памяти
         try {
             if (candles == null) {
                 candles = new ArrayList<>();
@@ -53,6 +54,7 @@ public class ChartServiceImpl implements ChartService {
             e.printStackTrace();
         }
 
+        //Отдаем только свечи с начала дня до времени NOW()
         List<Candle> res = new ArrayList<>();
         for (Candle candle: candles) {
             //Если свеча после текущей даты
@@ -62,8 +64,6 @@ public class ChartServiceImpl implements ChartService {
         }
 
         updateLastCandle(res.get(res.size() - 1));
-
-        System.out.println("size = " + res.size());
 
         return res;
     }

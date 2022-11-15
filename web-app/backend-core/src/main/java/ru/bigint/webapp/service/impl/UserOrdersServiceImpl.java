@@ -20,7 +20,7 @@ public class UserOrdersServiceImpl implements UserOrderService {
         for (int i = 0; i < 3; i++) {
             UserOrder userOrder = new UserOrder();
             userOrder.setId(1);
-            userOrder.setDateTime(LocalDateTime.now());
+            userOrder.setCreatedAt(LocalDateTime.now());
             userOrder.setOperation("BUY");
             userOrder.setTiker("USDRUB_TOM");
             userOrder.setPrice(65.23d);
