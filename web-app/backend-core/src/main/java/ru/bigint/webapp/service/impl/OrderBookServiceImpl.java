@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class OrderBookServiceImpl implements OrderBookService {
 
-    private int orderBookDepth = 20;
+    private int orderBookDepth = 10;
 
     private final OfferService offerService;
 

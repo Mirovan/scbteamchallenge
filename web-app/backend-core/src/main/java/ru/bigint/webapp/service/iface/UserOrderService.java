@@ -8,5 +8,15 @@ public interface UserOrderService {
     /**
      * Получить все заявки пользователя
      */
-    List<UserOrder> getOrders();
+    List<UserOrder> getAll();
+
+    /**
+     * Добавление заявки от пользователя
+     * */
+    UserOrder add(UserOrder userOrder);
+
+    /**
+     * Обновление заявки от пользователя
+     * */
+    UserOrder update(UserOrder userOrder);
 }

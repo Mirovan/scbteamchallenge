@@ -65,24 +65,24 @@
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="order-volume-group">Объем</span>
-                    <input id="order-volume" type="text" class="form-control" aria-describedby="order-volume-group">
+                    <input id="order-lot" type="text" class="form-control" aria-describedby="order-volume-group">
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="order-type-radio-1"
                                value="option1" checked>
-                        <label class="form-check-label" for="inlineRadio1" style="font-size: 12px;">Покупка</label>
+                        <label class="form-check-label" for="order-type-radio-1" style="font-size: 12px;">Покупка</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="order-type-radio-2"
                                value="option2">
-                        <label class="form-check-label" for="inlineRadio2" style="font-size: 12px;">Продажа</label>
+                        <label class="form-check-label" for="order-type-radio-2" style="font-size: 12px;">Продажа</label>
                     </div>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
-                    <button type="button" class="btn btn-primary">Ввод заявки</button>
+                    <button id="bt-create-order" type="button" class="btn btn-primary" onclick="createOrder();">Ввод заявки</button>
                 </div>
             </div>
         </div>

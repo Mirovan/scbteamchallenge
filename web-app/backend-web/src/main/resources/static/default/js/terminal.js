@@ -229,7 +229,7 @@ function showUserOrders() {
                 tableData +=
                     "<tr>" +
                     "<td>" + data[item]["id"] + "</td>" +
-                    "<td>" + data[item]["dateTime"] + "</td>" +
+                    "<td>" + getDate(data[item]["createdAt"]) + "</td>" +
                     "<td>" + data[item]["tiker"] + "</td>" +
                     "<td>" + data[item]["operation"] + "</td>" +
                     "<td>" + data[item]["price"] + "</td>" +
@@ -253,6 +253,9 @@ function addMinutes(date, minutes) {
 }
 
 
+/**
+ * Преобразование даты из timestamp в формат dd-mm-yyyy hh:mm
+ * */
 function getDate(dateTime) {
     let dateFormat = new Date(dateTime);
     let date = dateFormat.getDate();
@@ -270,4 +273,24 @@ function getDate(dateTime) {
         "." + year +
         " " + hours +
         ":" + minutes;
+}
+
+
+function createOrder() {
+    let operation = $("#order-type-radio").prop("checked", true) ? "BUY" : "SELL";
+    jQuery.ajax({
+        url: "/api/user-orders/save",
+        type: "POST",
+        data: JSON.stringify({
+            tiker: "USD000UTSTOM",
+            price: $("#order-price").val(),
+            lot: $("#order-lot").val(),
+            operation: $("#order-lot").val()
+        }),
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            showUserOrders();
+        }
+    });
 }
