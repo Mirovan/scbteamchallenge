@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.bigint.webapp.dto.Direction;
 import ru.bigint.webapp.dto.OrderBookOffer;
 import ru.bigint.webapp.dto.Tiker;
+import ru.bigint.webapp.service.iface.ChartService;
 import ru.bigint.webapp.service.iface.OfferService;
 import ru.bigint.webapp.utils.Util;
 
@@ -16,24 +17,38 @@ import java.util.List;
 @Service
 public class OfferServiceImpl implements OfferService {
 
-    int ordersCount = 100;
-    private Double lastPrice = 65.0000;
+    //Глубина стакана для генерации синтетических данных
+    private int ordersCount = 100;
 
-    @Override
-    public List<OrderBookOffer> getActualOffers() {
-        return getOffersByTime(LocalDateTime.now());
+    private final ChartService chartService;
+
+    public OfferServiceImpl(ChartService chartService) {
+        this.chartService = chartService;
     }
 
     @Override
-    public List<OrderBookOffer> getOffersByTime(LocalDateTime ldt) {
+    public List<OrderBookOffer> getActualOffers(String tikerName) {
+        return getOffersByTime(tikerName, LocalDateTime.now());
+    }
+
+    @Override
+    public List<OrderBookOffer> getOffersByTime(String tikerName, LocalDateTime ldt) {
         //На основе текущего курса генерируем синтетические данные
         List<OrderBookOffer> list = new ArrayList<>();
 
-        Tiker tiker = new Tiker("USDRUB_TOM - USD/РУБ",
-                "USDRUB_TOM",
-                "USD000UTSTOM",
+        //ToDo: сделать для всех инструментов
+//        Tiker tiker = new Tiker("USDRUB_TOM - USD/РУБ",
+//                "USDRUB_TOM",
+//                "USD000UTSTOM",
+//                1d,
+//                1000);
+        Tiker tiker = new Tiker(tikerName,
+                tikerName,
+                tikerName,
                 1d,
                 1000);
+
+        Double lastPrice = chartService.getLastPrice();
 
         //Формируем заявки на покупку и продажу
         for (int i = 0; i < ordersCount; i++) {

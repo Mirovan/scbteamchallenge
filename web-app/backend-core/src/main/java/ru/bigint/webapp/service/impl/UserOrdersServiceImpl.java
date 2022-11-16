@@ -23,8 +23,8 @@ public class UserOrdersServiceImpl implements UserOrderService {
 
     @Override
     public List<UserOrder> getAll() {
-        List<UserOrderEntity> userOrderEntities = new ArrayList<>();
-        userOrderEntities.addAll(userOrderRepo.findAllByOrderByCreatedAtDesc());
+        List<UserOrderEntity> userOrderEntities =
+                new ArrayList<>(userOrderRepo.findAllByOrderByCreatedAtDesc());
 
         return userOrderEntities.stream()
                 .map(this::entityToDto)

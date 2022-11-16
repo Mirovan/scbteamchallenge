@@ -11,10 +11,12 @@ $(function () {
 
 
 /**
- * Запрос на получение фооеров для стакана
+ * Запрос на получение оферов для стакана
  * */
 function loadOrderBook() {
-    $.get("/api/orderbook", {tiker: "USDRUB_TOM"})
+    let tiker = $("#select-tiker").val();
+
+    $.get("/api/orderbook", {tiker: tiker})
         .done(function (data) {
             let tableData = makeStakanData(data["offers"]);
 
@@ -43,7 +45,9 @@ function makeStakanData(orders) {
  * Запрос данных графика и отображение
  * */
 function showChart() {
-    $.get("/api/chart", {tiker: "USD000UTSTOM", timeframe: 10})
+    let tiker = $("#select-tiker").val();
+    let timeframe = $("#select-timeframe").val();
+    $.get("/api/chart", {tiker: tiker, timeframe: timeframe})
         .done(function (data) {
             makeChart(data);
         });
@@ -76,8 +80,6 @@ function makeChart(data) {
     // xMax = addMinutes(new Date(xMax), 30);
     yMin = parseInt(yMin * 100) / 100;
     yMax = parseInt(yMax * 100) / 100;
-    // console.log(yMin);
-    // console.log(yMax);
 
     //Свечной график
     let options = {
@@ -122,7 +124,7 @@ function makeChart(data) {
         tooltip: {
             custom: function ({series, seriesIndex, dataPointIndex, w}) {
                 let tooltipData = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-                let dateTime = getDate(tooltipData.x);
+                let dateTime = formatDate(tooltipData.x);
 
                 return '<ul>' +
                     '<li><b>Open</b>: ' + parseFloat(tooltipData.y[0]).toFixed(4) + '</li>' +
@@ -143,7 +145,13 @@ function makeChart(data) {
             series: [{
                 name: 'candles',
                 data: seriesData
-            }]
+            }],
+            yaxis: {
+                decimalsInFloat: 4,
+                min: yMin,
+                max: yMax,
+                tickAmount: 4
+            }
         });
     }
 
@@ -229,7 +237,7 @@ function showUserOrders() {
                 tableData +=
                     "<tr>" +
                     "<td>" + data[item]["id"] + "</td>" +
-                    "<td>" + getDate(data[item]["createdAt"]) + "</td>" +
+                    "<td>" + formatDate(data[item]["createdAt"]) + "</td>" +
                     "<td>" + data[item]["tiker"] + "</td>" +
                     "<td>" + data[item]["operation"] + "</td>" +
                     "<td>" + data[item]["price"] + "</td>" +
@@ -256,7 +264,7 @@ function addMinutes(date, minutes) {
 /**
  * Преобразование даты из timestamp в формат dd-mm-yyyy hh:mm
  * */
-function getDate(dateTime) {
+function formatDate(dateTime) {
     let dateFormat = new Date(dateTime);
     let date = dateFormat.getDate();
     if (date.toString().length < 2) date = "0" + date;
@@ -276,16 +284,20 @@ function getDate(dateTime) {
 }
 
 
+/**
+ * Отправка запроса на создание заявки пользователя
+ * */
 function createOrder() {
     let operation = $("#order-type-radio").prop("checked", true) ? "BUY" : "SELL";
+    let tiker = $("#select-tiker").val();
     jQuery.ajax({
         url: "/api/user-orders/save",
         type: "POST",
         data: JSON.stringify({
-            tiker: "USD000UTSTOM",
+            tiker: tiker,
             price: $("#order-price").val(),
             lot: $("#order-lot").val(),
-            operation: $("#order-lot").val()
+            operation: operation
         }),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -294,3 +306,4 @@ function createOrder() {
         }
     });
 }
+

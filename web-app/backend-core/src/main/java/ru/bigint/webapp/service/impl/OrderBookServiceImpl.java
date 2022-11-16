@@ -27,7 +27,7 @@ public class OrderBookServiceImpl implements OrderBookService {
 
     @Override
     public OrderBook getOrderBook(String tiker) {
-        List<OrderBookOffer> orderBookOffers = offerService.getActualOffers();
+        List<OrderBookOffer> orderBookOffers = offerService.getActualOffers(tiker);
 
         return new OrderBook(createOrderBookItems(orderBookOffers));
     }

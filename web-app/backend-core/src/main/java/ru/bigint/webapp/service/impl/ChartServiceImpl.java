@@ -14,21 +14,34 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ChartServiceImpl implements ChartService {
 
-    private String url = "https://iss.moex.com/iss/engines/currency/markets/selt/securities/USD000UTSTOM/candles.json";
+    private String url = "https://iss.moex.com/iss/engines/currency/markets/selt/securities/%TIKER%/candles.json";
     private List<Candle> candles;
+
+    //Значения по умолчанию для загрузки данных графиков
+    private String tiker;
+    private int timeframe;
+    private String fromDate = "2022-11-11";
+    private String toDate = "2022-11-12";
 
     @Override
     public List<Candle> getChart(String tiker, Integer timeframe) {
 
+        if (!Objects.equals(this.tiker, tiker) || this.timeframe != timeframe) {
+            candles = null;
+        }
+
         //Запрашиваем исторические свечи только один раз, далее берем из памяти
         try {
             if (candles == null) {
+                this.tiker = tiker;
+                this.timeframe = timeframe;
                 candles = new ArrayList<>();
-                String data = getJsonData();
+                String data = getJsonData(fromDate, toDate, timeframe, tiker);
                 JSONObject jsonData = new JSONObject(data);
                 JSONObject jsonCandles = jsonData.getJSONObject("candles");
                 JSONArray dataArr = jsonCandles.getJSONArray("data");
@@ -56,7 +69,7 @@ public class ChartServiceImpl implements ChartService {
 
         //Отдаем только свечи с начала дня до времени NOW()
         List<Candle> res = new ArrayList<>();
-        for (Candle candle: candles) {
+        for (Candle candle : candles) {
             //Если свеча после текущей даты
             LocalDateTime fakeNow = LocalDateTime.of(candle.getBegin().toLocalDate(), LocalDateTime.now().toLocalTime());
             if (candle.getBegin().isAfter(fakeNow)) break;
@@ -66,6 +79,25 @@ public class ChartServiceImpl implements ChartService {
         updateLastCandle(res.get(res.size() - 1));
 
         return res;
+    }
+
+    @Override
+    public Candle getLastCandle() {
+        if (candles != null && !candles.isEmpty()) {
+            return candles.get(candles.size() - 1);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Double getLastPrice() {
+        Candle candle = getLastCandle();
+        if (candle != null) {
+            return candle.getClose();
+        } else {
+            return null;
+        }
     }
 
     /*
@@ -80,12 +112,12 @@ public class ChartServiceImpl implements ChartService {
         candle.setClose(newClose);
     }
 
-    private String getJsonData() {
+    private String getJsonData(String fromDate, String toDate, int interval, String tiker) {
         Map<String, String> params = new LinkedHashMap<>();
-        params.put("from", "2022-11-11");
-        params.put("till", "2022-11-12");
-        params.put("interval", "10");
+        params.put("from", fromDate);
+        params.put("till", toDate);
+        params.put("interval", String.valueOf(interval));
         params.put("start", "0");
-        return HttpClient.sendGet(url, params);
+        return HttpClient.sendGet(url.replace("%TIKER%", tiker), params);
     }
 }

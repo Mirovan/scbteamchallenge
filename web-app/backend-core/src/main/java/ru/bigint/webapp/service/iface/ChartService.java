@@ -8,8 +8,18 @@ public interface ChartService {
     /**
      * Получить график
      *
-     * @param tiker
-     * @param timeframe
+     * @param tiker     - инструмент
+     * @param timeframe - таймфрейм
      */
     List<Candle> getChart(String tiker, Integer timeframe);
+
+    /**
+     * Получить последнюю свечу
+     */
+    Candle getLastCandle();
+
+    /**
+     * Получить последнюю цену по свече
+     */
+    Double getLastPrice();
 }

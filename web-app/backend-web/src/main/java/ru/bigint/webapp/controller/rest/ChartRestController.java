@@ -25,7 +25,7 @@ public class ChartRestController {
 
     @GetMapping
     public List<Candle> getChart(@RequestParam(name = "tiker") String tiker,
-                                     @RequestParam(name = "timeframe", defaultValue = "60") Integer timeframe) {
+                                 @RequestParam(name = "timeframe", defaultValue = "60") Integer timeframe) {
         return chartService.getChart(tiker, timeframe);
     }
 

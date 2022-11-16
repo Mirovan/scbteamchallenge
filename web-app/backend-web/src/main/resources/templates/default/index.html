@@ -12,7 +12,33 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-2">
+
+            <div class="row">
+                <strong>Таймфрейм</strong>
+                <div class="input-group input-group-sm mb-3">
+                    <select id="select-timeframe" class="form-select form-select-sm" onchange="showChart();">
+                        <option value="1">1 минута</option>
+                        <option value="10" selected>10 минут</option>
+                        <option value="60">60 минут</option>
+                    </select>
+                </div>
+            </div>
+
+            <strong>Инструмент</strong>
+            <div class="row">
+                <div class="input-group input-group-sm mb-3">
+                    <select id="select-tiker" size="10" class="form-select form-select-sm" onchange="showChart();">
+                        <option value="USD000UTSTOM" selected>USDRUB_TOM</option>
+                        <option value="EUR_RUB__TOM">EURRUB_TOM</option>
+                        <option value="CNYRUB_TOM">CNYRUB_TOM</option>
+                        <option value="AMDRUB_TOM">AMDRUB_TOM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
             <div class="chart-box">
                 <div id="chart-candlestick"></div>
                 <div id="chart-bar"></div>
@@ -35,27 +61,6 @@
 
         <div class="col-2">
             <div class="row">
-                <strong>Инструмент</strong>
-                <div class="input-group input-group-sm mb-3">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Инструмент</option>
-                        <option value="USD000UTSTOM">USDRUB_TOM</option>
-                        <option value="USD000UTSTOM">EURRUB_TOM</option>
-                    </select>
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Таймфрейм</option>
-                        <option value="1">1 минута</option>
-                        <option value="10">10 минут</option>
-                        <option value="30">30 минут</option>
-                        <option value="60">60 минут</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
                 <strong>Ввод заявки</strong>
 
                 <div class="input-group input-group-sm mb-3">
@@ -65,24 +70,28 @@
 
                 <div class="input-group input-group-sm mb-3">
                     <span class="input-group-text" id="order-volume-group">Объем</span>
-                    <input id="order-lot" type="text" class="form-control" aria-describedby="order-volume-group">
+                    <input id="order-lot" type="text" class="form-control" aria-describedby="order-volume-group" value="0">
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="order-type-radio-1"
                                value="option1" checked>
-                        <label class="form-check-label" for="order-type-radio-1" style="font-size: 12px;">Покупка</label>
+                        <label class="form-check-label" for="order-type-radio-1"
+                               style="font-size: 12px;">Покупка</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="order-type-radio-2"
                                value="option2">
-                        <label class="form-check-label" for="order-type-radio-2" style="font-size: 12px;">Продажа</label>
+                        <label class="form-check-label" for="order-type-radio-2"
+                               style="font-size: 12px;">Продажа</label>
                     </div>
                 </div>
 
                 <div class="input-group input-group-sm mb-3">
-                    <button id="bt-create-order" type="button" class="btn btn-primary" onclick="createOrder();">Ввод заявки</button>
+                    <button id="bt-create-order" type="button" class="btn btn-primary" onclick="createOrder();">Ввод
+                        заявки
+                    </button>
                 </div>
             </div>
         </div>

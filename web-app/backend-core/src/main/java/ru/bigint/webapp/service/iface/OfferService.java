@@ -8,13 +8,14 @@ import java.util.List;
 public interface OfferService {
     /**
      * Получить все заявки по текущему времени
+     * @param tikerName - инструмент
      */
-    List<OrderBookOffer> getActualOffers();
+    List<OrderBookOffer> getActualOffers(String tikerName);
 
     /**
      * Получить все заявки по указанному времени
-     *
      * @param ldt - время для выборки заявок
+     * @param tikerName - инструмент
      */
-    List<OrderBookOffer> getOffersByTime(LocalDateTime ldt);
+    List<OrderBookOffer> getOffersByTime(String tikerName, LocalDateTime ldt);
 }
