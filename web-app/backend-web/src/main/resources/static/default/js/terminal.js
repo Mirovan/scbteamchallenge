@@ -288,7 +288,7 @@ function formatDate(dateTime) {
  * Отправка запроса на создание заявки пользователя
  * */
 function createOrder() {
-    let operation = $("#order-type-radio").prop("checked", true) ? "BUY" : "SELL";
+    let operation = $("#order-type-radio").is(':checked') ? "BUY" : "SELL";
     let tiker = $("#select-tiker").val();
     jQuery.ajax({
         url: "/api/user-orders/save",
