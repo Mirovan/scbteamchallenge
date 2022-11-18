@@ -4,6 +4,7 @@ $(function () {
     showUserOrders();
     showChart();
     loadOrderBook();
+    orderBookClick();
 
     setInterval(showChart, 3000);
     setInterval(loadOrderBook, 700);
@@ -20,7 +21,7 @@ function loadOrderBook() {
         .done(function (data) {
             let tableData = makeStakanData(data["offers"]);
 
-            $("#stakan").html(tableData);
+            $("#stakan-offers").html(tableData);
         });
 }
 
@@ -288,7 +289,7 @@ function formatDate(dateTime) {
  * Отправка запроса на создание заявки пользователя
  * */
 function createOrder() {
-    let operation = $("#order-type-radio").is(':checked') ? "BUY" : "SELL";
+    let operation = $("#order-type-radio-1").is(':checked') ? "BUY" : "SELL";
     let tiker = $("#select-tiker").val();
     jQuery.ajax({
         url: "/api/user-orders/save",
@@ -307,3 +308,15 @@ function createOrder() {
     });
 }
 
+
+/**
+ * Событие нажатия на строку стакана - вставляет в поле ввода заявки цену
+ * */
+function orderBookClick() {
+    $("#stakan-offers").on("click", "tr", function() {
+        let values = $(this).find('td').map(function() {
+            return $(this).text();
+        }).get();
+        $("#order-price").val(values[0]);
+    });
+}

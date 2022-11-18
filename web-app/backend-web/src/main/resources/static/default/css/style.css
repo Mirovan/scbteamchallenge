@@ -24,6 +24,7 @@ footer {
 }
 #stakan-table tr td {
     padding: 0 4px;
+    cursor: pointer;
 }
 
 #table-orders tr th {
