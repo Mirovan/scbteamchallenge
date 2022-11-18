@@ -12,7 +12,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-2">
+        <div class="col-3">
 
             <div class="row">
                 <strong>Таймфрейм</strong>
@@ -25,20 +25,45 @@
                 </div>
             </div>
 
-            <strong>Инструмент</strong>
+            <strong>Инструменты</strong>
             <div class="row">
                 <div class="input-group input-group-sm mb-3">
-                    <select id="select-tiker" size="10" class="form-select form-select-sm" onchange="showChart();">
-                        <option value="USD000UTSTOM" selected>USDRUB_TOM</option>
-                        <option value="EUR_RUB__TOM">EURRUB_TOM</option>
-                        <option value="CNYRUB_TOM">CNYRUB_TOM</option>
-                        <option value="AMDRUB_TOM">AMDRUB_TOM</option>
-                    </select>
+                    <table id="tikers-table" class="table table-striped" style="font-size: 12px;">
+                        <thead>
+                        <tr>
+                            <th style="width: 75px;">Инструмент</th>
+                            <th style="width: 75px;">Цена</th>
+                            <th style="width: 75px;">Изменение</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tikers-body">
+                        <tr data-tikercode="USD000UTSTOM">
+                            <td>USDRUB_TOM</td>
+                            <td>63.2146</td>
+                            <td>2 %</td>
+                        </tr>
+                        <tr data-tikercode="EUR_RUB__TOM">
+                            <td>EURRUB_TOM</td>
+                            <td>63.2146</td>
+                            <td>2 %</td>
+                        </tr>
+                        <tr data-tikercode="CNYRUB_TOM">
+                            <td>CNYRUB_TOM</td>
+                            <td>63.2146</td>
+                            <td>2 %</td>
+                        </tr>
+                        <tr data-tikercode="AMDRUB_TOM">
+                            <td>AMDRUB_TOM</td>
+                            <td>63.2146</td>
+                            <td>2 %</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
             <div class="chart-box">
                 <div id="chart-candlestick"></div>
                 <div id="chart-bar"></div>

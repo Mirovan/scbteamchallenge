@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -52,8 +53,10 @@ public class OfferServiceImpl implements OfferService {
 
         //Формируем заявки на покупку и продажу
         for (int i = 0; i < ordersCount; i++) {
-            list.add(makeOffer(tiker, lastPrice, Direction.BUY));
-            list.add(makeOffer(tiker, lastPrice, Direction.SELL));
+            if (Objects.nonNull(lastPrice)) {
+                list.add(makeOffer(tiker, lastPrice, Direction.BUY));
+                list.add(makeOffer(tiker, lastPrice, Direction.SELL));
+            }
         }
 
         return list;

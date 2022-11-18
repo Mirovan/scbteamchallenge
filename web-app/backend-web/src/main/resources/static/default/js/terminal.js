@@ -1,10 +1,13 @@
 let chart = null;
+let tiker = null;
 
 $(function () {
+    tiker = getTiker();
     showUserOrders();
     showChart();
     loadOrderBook();
     orderBookClick();
+    tikerTableClick();
 
     setInterval(showChart, 3000);
     setInterval(loadOrderBook, 700);
@@ -46,7 +49,7 @@ function makeStakanData(orders) {
  * Запрос данных графика и отображение
  * */
 function showChart() {
-    let tiker = $("#select-tiker").val();
+    // let tiker = $("#select-tiker").val();
     let timeframe = $("#select-timeframe").val();
     $.get("/api/chart", {tiker: tiker, timeframe: timeframe})
         .done(function (data) {
@@ -313,10 +316,37 @@ function createOrder() {
  * Событие нажатия на строку стакана - вставляет в поле ввода заявки цену
  * */
 function orderBookClick() {
-    $("#stakan-offers").on("click", "tr", function() {
-        let values = $(this).find('td').map(function() {
+    $("#stakan-offers").on("click", "tr", function () {
+        let values = $(this).find('td').map(function () {
             return $(this).text();
         }).get();
         $("#order-price").val(values[0]);
     });
+}
+
+
+/**
+ * Событие нажатия на строку таблицы с инструментами - вставляет на изменение тикера на графике и стакана
+ * */
+function tikerTableClick() {
+    $("#tikers-table").on("click", "tr", function () {
+        let values = $(this).map(function () {
+            return $(this).data("tikercode");
+        }).get();
+
+        tiker = values[0];
+        showChart();
+    });
+}
+
+
+/**
+ * Получение выбранного тикера из таблицы
+ * */
+function getTiker() {
+    let values = $("#tikers-body").find("tr:first").map(function () {
+        return $(this).data("tikercode");
+    }).get();
+
+    return values[0];
 }

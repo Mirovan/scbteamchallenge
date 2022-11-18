@@ -41,6 +41,16 @@ footer {
     background: #c4c4c4;
 }
 
+#tikers-table tbody, td, tfoot, th, thead, tr {
+    border: none;
+}
+#tikers-table tr th {
+    background: #c4c4c4;
+}
+#tikers-table td {
+    font-size: 12px;
+    cursor: pointer;
+}
 
 #user-trades tr td {
     font-size: 12px;

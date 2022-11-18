@@ -76,7 +76,11 @@ public class ChartServiceImpl implements ChartService {
             res.add(candle);
         }
 
-        updateLastCandle(res.get(res.size() - 1));
+        if (!res.isEmpty()) {
+            updateLastCandle(res.get(res.size() - 1));
+        } else {
+            System.out.println("Нет свечей");
+        }
 
         return res;
     }
