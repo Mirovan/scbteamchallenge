@@ -52,6 +52,10 @@ footer {
     cursor: pointer;
 }
 
+tr.selected-tr {
+    border: #854587 solid;
+}
+
 #user-trades tr td {
     font-size: 12px;
 }

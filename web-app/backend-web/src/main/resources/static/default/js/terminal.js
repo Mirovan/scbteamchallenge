@@ -18,8 +18,6 @@ $(function () {
  * Запрос на получение оферов для стакана
  * */
 function loadOrderBook() {
-    let tiker = $("#select-tiker").val();
-
     $.get("/api/orderbook", {tiker: tiker})
         .done(function (data) {
             let tableData = makeStakanData(data["offers"]);
@@ -330,6 +328,21 @@ function orderBookClick() {
  * */
 function tikerTableClick() {
     $("#tikers-table").on("click", "tr", function () {
+
+        // console.log("111111111111111");
+
+        // let item = $("#tikers-table").find("tr");
+        // console.log(item)
+        $("#tikers-table").find("tr.selected-tr").each(function () {
+            // console.log("11111111");
+            // $(this).find('tr.selected-tr').each(function(){
+            $(this).removeClass("selected-tr");
+            // $(".selected-tr").css("border", "3px solid red");
+            // })
+        });
+
+        $(this).addClass("selected-tr");
+
         let values = $(this).map(function () {
             return $(this).data("tikercode");
         }).get();
