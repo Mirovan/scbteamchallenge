@@ -235,6 +235,7 @@ function showUserOrders() {
         .done(function (data) {
             let tableData = "";
 
+            console.log(tableData);
             for (let item in data) {
                 tableData +=
                     "<tr>" +
@@ -291,7 +292,6 @@ function formatDate(dateTime) {
  * */
 function createOrder() {
     let operation = $("#order-type-radio-1").is(':checked') ? "BUY" : "SELL";
-    let tiker = $("#select-tiker").val();
     jQuery.ajax({
         url: "/api/user-orders/save",
         type: "POST",
@@ -329,16 +329,8 @@ function orderBookClick() {
 function tikerTableClick() {
     $("#tikers-table").on("click", "tr", function () {
 
-        // console.log("111111111111111");
-
-        // let item = $("#tikers-table").find("tr");
-        // console.log(item)
         $("#tikers-table").find("tr.selected-tr").each(function () {
-            // console.log("11111111");
-            // $(this).find('tr.selected-tr').each(function(){
             $(this).removeClass("selected-tr");
-            // $(".selected-tr").css("border", "3px solid red");
-            // })
         });
 
         $(this).addClass("selected-tr");

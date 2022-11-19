@@ -1,9 +1,9 @@
-package ru.bigint.webapp.dto;
+package ru.bigint.webapp.dto.terminal;
 
 /**
  * Направление сделки
  * */
-public enum Direction {
+public enum Operation {
     BUY,
     SELL;
 }

@@ -1,9 +1,9 @@
 package ru.bigint.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.bigint.webapp.dto.Direction;
-import ru.bigint.webapp.dto.OrderBookOffer;
-import ru.bigint.webapp.dto.Tiker;
+import ru.bigint.webapp.dto.terminal.Operation;
+import ru.bigint.webapp.dto.terminal.OrderBookOffer;
+import ru.bigint.webapp.dto.terminal.Tiker;
 import ru.bigint.webapp.service.iface.ChartService;
 import ru.bigint.webapp.service.iface.OfferService;
 import ru.bigint.webapp.utils.Util;
@@ -54,22 +54,22 @@ public class OfferServiceImpl implements OfferService {
         //Формируем заявки на покупку и продажу
         for (int i = 0; i < ordersCount; i++) {
             if (Objects.nonNull(lastPrice)) {
-                list.add(makeOffer(tiker, lastPrice, Direction.BUY));
-                list.add(makeOffer(tiker, lastPrice, Direction.SELL));
+                list.add(makeOffer(tiker, lastPrice, Operation.BUY));
+                list.add(makeOffer(tiker, lastPrice, Operation.SELL));
             }
         }
 
         return list;
     }
 
-    private OrderBookOffer makeOffer(Tiker tiker, Double lastPrice, Direction direction) {
+    private OrderBookOffer makeOffer(Tiker tiker, Double lastPrice, Operation operation) {
         //Коэфициент определяющий направление отклонения от цены
-        int koef = direction == Direction.BUY ? -1 : 1;
+        int koef = operation == Operation.BUY ? -1 : 1;
 
         //Отклонение в процентах от цены lastPrice
         Double rndPercent = 100 + koef * Util.getRandomNumber(1, 5000) / 10000d;
         BigDecimal price = BigDecimal.valueOf(lastPrice * rndPercent / 100).setScale(3, RoundingMode.CEILING);
 
-        return new OrderBookOffer(tiker, price, Util.getRandomNumber(1, 100), direction);
+        return new OrderBookOffer(tiker, price, Util.getRandomNumber(1, 100), operation);
     }
 }

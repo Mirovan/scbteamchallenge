@@ -1,6 +1,6 @@
 package ru.bigint.webapp.service.iface;
 
-import ru.bigint.webapp.dto.UserOrder;
+import ru.bigint.webapp.dto.terminal.UserOrder;
 
 import java.util.List;
 

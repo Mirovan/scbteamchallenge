@@ -1,6 +1,6 @@
 package ru.bigint.webapp.service.iface;
 
-import ru.bigint.webapp.dto.OrderBook;
+import ru.bigint.webapp.dto.terminal.OrderBook;
 
 public interface OrderBookService {
     /**

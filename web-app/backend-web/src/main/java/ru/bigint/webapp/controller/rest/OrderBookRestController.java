@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bigint.webapp.dto.OrderBook;
+import ru.bigint.webapp.dto.terminal.OrderBook;
 import ru.bigint.webapp.service.iface.OrderBookService;
 
 @Api(tags = {"Стакан"})

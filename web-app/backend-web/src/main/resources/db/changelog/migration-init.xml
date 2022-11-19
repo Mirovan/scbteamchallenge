@@ -8,6 +8,70 @@
 
     <changeSet id="init" author="milovanov">
 
+        <!--Roles-->
+        <createTable tableName="role">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="role">
+            <column name="code" value="ROLE_ADMIN"/>
+            <column name="name" value="Администратор"/>
+        </insert>
+
+        <insert tableName="role">
+            <column name="code" value="ROLE_USER"/>
+            <column name="name" value="Обычный Пользователь"/>
+        </insert>
+
+
+        <!--users-->
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true" startWith="2">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(200)">
+                <constraints unique="true" />
+            </column>
+            <column name="password" type="varchar(200)" />
+            <column name="firstname" type="varchar(200)" />
+            <column name="sirname" type="varchar(200)" />
+            <column name="enabled" type="boolean" />
+        </createTable>
+
+        <insert tableName="users">
+            <column name="email" value="a@a.ru"/>
+            <column name="password" value="$2a$12$TkJFxQxoxhSB8c1uoTQzJ.JyaCNBEI9JiL7PTHuY1IKLqOFTWelAC"/>  <!--000000-->
+            <column name="firstname" value="Администратор"/>
+            <column name="sirname" value="Администратор"/>
+            <column name="enabled" value="true"/>
+        </insert>
+
+        <!--User roles-->
+        <createTable tableName="user_role">
+            <column name="id" type="int" autoIncrement="true" startWith="3">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_user" type="int">
+                <constraints nullable="true" foreignKeyName="fk_user_id" references="users(id)"/>
+            </column>
+            <column name="id_role" type="int">
+                <constraints nullable="true" foreignKeyName="fk_role_id" references="role(id)"/>
+            </column>
+        </createTable>
+
+        <insert tableName="user_role">
+            <column name="id_user" valueComputed="(SELECT id FROM users WHERE email='a@a.ru')"/>
+            <column name="id_role" valueComputed="(SELECT id FROM role WHERE code='ROLE_ADMIN')"/>
+        </insert>
+
         <!--Заявки пользователя-->
         <createTable tableName="user_orders">
             <column name="id" type="int" autoIncrement="true">

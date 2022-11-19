@@ -1,4 +1,4 @@
-package ru.bigint.webapp.dto;
+package ru.bigint.webapp.dto.terminal;
 
 public class Tiker {
     //Полное название

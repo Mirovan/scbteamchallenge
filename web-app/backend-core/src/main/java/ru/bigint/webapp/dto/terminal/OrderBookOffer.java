@@ -1,4 +1,4 @@
-package ru.bigint.webapp.dto;
+package ru.bigint.webapp.dto.terminal;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -19,22 +19,22 @@ public class OrderBookOffer {
     //Число лотов
     private Integer volume;
     //Направление заявки - покупка или продажа
-    private Direction direction;
+    private Operation operation;
 
     public OrderBookOffer() {
     }
 
-    public OrderBookOffer(Tiker tiker, BigDecimal price, Integer volume, Direction direction) {
+    public OrderBookOffer(Tiker tiker, BigDecimal price, Integer volume, Operation operation) {
         this.tiker = tiker;
         this.price = price;
         this.volume = volume;
-        this.direction = direction;
+        this.operation = operation;
     }
 
-    public OrderBookOffer(BigDecimal price, Integer volume, Direction direction) {
+    public OrderBookOffer(BigDecimal price, Integer volume, Operation operation) {
         this.price = price;
         this.volume = volume;
-        this.direction = direction;
+        this.operation = operation;
     }
 
     public Tiker getTiker() {
@@ -61,11 +61,11 @@ public class OrderBookOffer {
         this.volume = volume;
     }
 
-    public Direction getDirection() {
-        return direction;
+    public Operation getDirection() {
+        return operation;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
+    public void setDirection(Operation operation) {
+        this.operation = operation;
     }
 }

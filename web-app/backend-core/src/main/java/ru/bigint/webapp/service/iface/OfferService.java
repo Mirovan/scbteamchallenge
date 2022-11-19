@@ -1,6 +1,6 @@
 package ru.bigint.webapp.service.iface;
 
-import ru.bigint.webapp.dto.OrderBookOffer;
+import ru.bigint.webapp.dto.terminal.OrderBookOffer;
 
 import java.time.LocalDateTime;
 import java.util.List;

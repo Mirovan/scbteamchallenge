@@ -8,24 +8,25 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
     static-path-pattern: /static/**
+    log-request-details: true
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
 
   datasource:
-    url: jdbc:h2:file:c:/temp/db/db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-#    url: jdbc:postgresql://localhost:5432/temp
+    #    url: jdbc:h2:file:c:/temp/db/db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:postgresql://localhost:5432/scb
     username: postgres
     password: postgres
-    driver-class-name: org.h2.Driver
-  #    driver-class-name: org.postgresql.Driver
+    #    driver-class-name: org.h2.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    #    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        #        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        #        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
         format_sql: true
         jdbc:
           lob:
@@ -51,6 +52,7 @@ logging:
     org:
       springframework:
         web: DEBUG
+        security: DEBUG
       hibernate:
         SQL: DEBUG
         type:

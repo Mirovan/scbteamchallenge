@@ -1,9 +1,9 @@
 package ru.bigint.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.bigint.webapp.dto.Direction;
-import ru.bigint.webapp.dto.OrderBookOffer;
-import ru.bigint.webapp.dto.OrderBook;
+import ru.bigint.webapp.dto.terminal.Operation;
+import ru.bigint.webapp.dto.terminal.OrderBookOffer;
+import ru.bigint.webapp.dto.terminal.OrderBook;
 import ru.bigint.webapp.service.iface.OrderBookService;
 import ru.bigint.webapp.service.iface.OfferService;
 
@@ -46,19 +46,19 @@ public class OrderBookServiceImpl implements OrderBookService {
                         Integer lot = item.getValue().stream()
                                 .map(OrderBookOffer::getVolume)
                                 .mapToInt(Integer::intValue).sum();
-                        Direction dir = item.getValue().stream().findAny().get().getDirection();
+                        Operation dir = item.getValue().stream().findAny().get().getDirection();
                         return new OrderBookOffer(price, lot, dir);
                     })
                     .toList();
 
             List<OrderBookOffer> asks = orderBookOffers.stream()
-                    .filter(item -> item.getDirection() == Direction.SELL)
+                    .filter(item -> item.getDirection() == Operation.SELL)
                     .sorted(Comparator.comparing(OrderBookOffer::getPrice).reversed())
                     .toList();
             asks = asks.subList(asks.size() - orderBookDepth, asks.size());
 
             List<OrderBookOffer> bids = orderBookOffers.stream()
-                    .filter(item -> item.getDirection() == Direction.BUY)
+                    .filter(item -> item.getDirection() == Operation.BUY)
                     .sorted(Comparator.comparing(OrderBookOffer::getPrice).reversed())
                     .toList();
             bids = bids.subList(0, orderBookDepth);

@@ -1,7 +1,7 @@
 package ru.bigint.webapp.service.impl;
 
 import org.springframework.stereotype.Service;
-import ru.bigint.webapp.dto.UserOrder;
+import ru.bigint.webapp.dto.terminal.UserOrder;
 import ru.bigint.webapp.entity.UserOrderEntity;
 import ru.bigint.webapp.repository.UserOrderRepo;
 import ru.bigint.webapp.service.iface.UserOrderService;
