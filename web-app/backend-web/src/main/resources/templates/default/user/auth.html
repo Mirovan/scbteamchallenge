@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
+<link th:href="@{/static/default/vendor/mdb/css/mdb.min.css}" rel="stylesheet"/>
+
+
 <head th:replace="inc/head.inc::head"></head>
+
+<script src="/static/default/vendor/mdb/js/mdb.min.js"></script>
 
 <body>
 
@@ -26,7 +31,8 @@
 
     <!-- Pills content -->
     <div class="tab-content">
-        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login" style="min-height: 250px;">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login"
+             style="min-height: 250px;">
             <form method="post" action="/">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
@@ -66,7 +72,8 @@
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" name="password" th:field="*{password}" id="registerPassword" class="form-control"/>
+                    <input type="password" name="password" th:field="*{password}" id="registerPassword"
+                           class="form-control"/>
                     <label class="form-label" for="registerPassword">Пароль</label>
                 </div>
 

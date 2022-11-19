@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="inc/head.inc::head"></head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:replace="inc/top_nav.inc::top_nav"></nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <h2>Пополнение баланса</h2>
+    </div>
+
+    <div class="row">
+        <div class="container bg-light d-md-flex align-items-center d-flex justify-content-center">
+            <div class="card box2 shadow-sm">
+                <div class="d-flex align-items-center justify-content-between p-md-5 p-4">
+                    <span class="h5 fw-bold m-0">Пополнение счета</span>
+                </div>
+                <ul class="nav nav-tabs mb-3 px-md-4 px-2">
+                    <li class="nav-item"><a class="nav-link px-2 active" aria-current="page" href="#">Кредитная карта</a>
+                    </li>
+                </ul>
+                <form id="payment-form" method="post" action="/money/payment">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex flex-column px-md-5 px-4 mb-4"><span>Номер карты</span>
+                                <div class="inputWithIcon"><input class="form-control-card" type="text"
+                                                                  value="5136 1845 5468 3894"> <span class=""> <img
+                                        style="width: 50px; height: 20px; object-fit: cover"
+                                        src="https://www.freepnglogos.com/uploads/mastercard-png/mastercard-logo-logok-15.png"
+                                        alt=""></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-column ps-md-5 px-md-0 px-4 mb-4"><span>Дата окончания<span
+                                    class="ps-1">Date</span></span>
+                                <div class="inputWithIcon"><input type="text" class="form-control-card" value="05/24">
+                                    <span class="fas fa-calendar-alt"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-column pe-md-5 px-md-0 px-4 mb-4"><span>Code CVV</span>
+                                <div class="inputWithIcon"><input type="password" class="form-control-card" value="123">
+                                    <span class="fas fa-lock"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex flex-column px-md-6 px-5 mb-5"><span>Имя владельца</span>
+                                <div class="inputWithIcon"><input class="form-control-card text-uppercase" type="text"
+                                                                  value="Ivan Petrov"> <span
+                                        class="far fa-user"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex flex-column px-md-5 px-4 mb-4"><span>Сумма платежа</span>
+                                <div class="inputWithIcon"><input class="form-control-card text-uppercase" type="text"
+                                                                  value="15000"> <span
+                                        class="far fa-user"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-12 px-md-5 px-4 mt-3">
+                            <input type="submit" class="btn btn-primary w-100" value="Пополнить счет">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="inc/footer.inc::footer"></footer>
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="inc/js.inc::js"></div>
+
+</body>
+
+</html>

@@ -45,13 +45,12 @@ public class SecurityConfig {
                 .httpBasic().disable()
 
                 .authorizeRequests()
-//                .antMatchers("**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/**").permitAll()
-                .antMatchers("/terminal").permitAll()
+                .antMatchers("/terminal/**").permitAll()
+                .antMatchers("/money/**").permitAll()
                 .antMatchers("/user/register").permitAll()
-//                .antMatchers("/user/**").authenticated()
-                .antMatchers("/admin").authenticated()//.hasAuthority("ADMIN")
+                .antMatchers("/admin").hasAuthority("ADMIN")
 
                 // Any other URLs which are not configured in above antMatchers
                 // generally declared aunthenticated() in real time

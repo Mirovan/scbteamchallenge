@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="inc/head.inc::head"></head>
+
+<body>
+
+<!-- Navigation -->
+<nav th:replace="inc/top_nav.inc::top_nav"></nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <h2>Счет клиента</h2>
+    </div>
+
+    <div class="row">
+        <a href="/money/payment">Пополнить счет</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer th:replace="inc/footer.inc::footer"></footer>
+
+<!-- Bootstrap core JavaScript -->
+<div th:replace="inc/js.inc::js"></div>
+
+</body>
+
+</html>

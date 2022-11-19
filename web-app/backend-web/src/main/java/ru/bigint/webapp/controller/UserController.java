@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ModelAndView registerUser(@ModelAttribute("user") @Valid UserDto userDto,
+    public ModelAndView register(@ModelAttribute("user") @Valid UserDto userDto,
                                      HttpServletRequest request, Errors errors) {
         try {
             UserEntity userEntity = userService.registerUser(userDto);
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/personal")
-    public ModelAndView registerUser() {
+    public ModelAndView personal() {
         ModelAndView modelAndView = new ModelAndView();
 //        modelAndView.addObject("user", userDto);
         modelAndView.setViewName("user/personal");
