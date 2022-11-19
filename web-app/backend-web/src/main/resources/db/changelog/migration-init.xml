@@ -97,6 +97,41 @@
             </column>
         </createTable>
 
+        <!--Сделки пользователя - в рамках одной заявки может быть несколько сделок-->
+        <createTable tableName="user_deals">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="varchar(300)">
+                <constraints nullable="false" foreignKeyName="fk_user_order_id" references="user_orders(id)"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lot" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--Активы пользователя - таблица проекций от таблицы сделок пользователя-->
+        <createTable tableName="user_assets">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tiker" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="avg-price" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lot" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
     </changeSet>
 
 </databaseChangeLog>

@@ -73,6 +73,16 @@
                     </execution>
                 </executions>
             </plugin>
+
+<!--            <plugin>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>3.6.2</version>-->
+<!--                <configuration>-->
+<!--                    <propertyFile>src/main/resources/liquibase.properties</propertyFile>-->
+<!--                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
