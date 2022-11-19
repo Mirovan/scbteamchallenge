@@ -3,21 +3,29 @@ package ru.bigint.webapp.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "user_orders")
-public class UserOrderEntity {
+@Table(name = "user_deals")
+public class UserDealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name="order_id", nullable=false)
+    private UserOrderEntity userOrder;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -37,12 +45,7 @@ public class UserOrderEntity {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(mappedBy = "userOrder",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    List<UserDealEntity> userDeals;
-
-    public UserOrderEntity() {
+    public UserDealEntity() {
     }
 
     public Integer getId() {
@@ -101,11 +104,11 @@ public class UserOrderEntity {
         this.status = status;
     }
 
-    public List<UserDealEntity> getUserDeals() {
-        return userDeals;
+    public UserOrderEntity getUserOrder() {
+        return userOrder;
     }
 
-    public void setUserDeals(List<UserDealEntity> userDeals) {
-        this.userDeals = userDeals;
+    public void setUserOrder(UserOrderEntity userOrder) {
+        this.userOrder = userOrder;
     }
 }

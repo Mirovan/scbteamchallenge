@@ -15,18 +15,22 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary" href="/money/payment">Пополнить счет</a>
-        <h4>Баланс счета</h4>
-        <div class="row">
-            <strong>Баланс всего: </strong> <span>123000 руб.</span><br />
-            <strong>Свободные средства: </strong> <span>123000 руб.</span><br/>
-            <strong>Заблокированные средства: </strong> <span>123000 руб.</span><br/>
+        <div class="col-10">
+<!--            <h4>Баланс счета</h4>-->
+            <div class="row">
+                <p><strong>Баланс всего: </strong> 123000.00 руб.</p><br/>
+                <p><strong>Свободные средства: </strong> 64204.20 руб.</p><br/>
+                <p><strong>Заблокированные средства: </strong> 2645.24 руб.</p><br/>
+            </div>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-primary" href="/money/payment">Пополнить счет</a>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin: 30px 0;">
         <h4>Позиции по счету</h4>
-        <table id="stakan-table" class="table table-striped" style="font-size: 13px;">
+        <table id="stakan-table" class="table table-striped" style="margin: 0 10px; font-size: 13px;">
             <tr>
                 <th>Инструмент</th>
                 <th>Текущая цена</th>
