@@ -36,6 +36,10 @@ footer {
     font-size: 12px;
 }
 
+#user-deals tr td {
+    font-size: 12px;
+}
+
 #table-trades tr th {
     font-size: 12px;
     background: #c4c4c4;

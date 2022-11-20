@@ -15,16 +15,19 @@
     </div>
 
     <div class="row">
-        <div class="col-10">
-<!--            <h4>Баланс счета</h4>-->
+        <div class="col-4">
+            <!--            <h4>Баланс счета</h4>-->
             <div class="row">
-                <p><strong>Баланс всего: </strong> 123000.00 руб.</p><br/>
+                <p><strong>Баланс всего: </strong> 109723.00 руб.</p><br/>
                 <p><strong>Свободные средства: </strong> 64204.20 руб.</p><br/>
                 <p><strong>Заблокированные средства: </strong> 2645.24 руб.</p><br/>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-4">
             <a class="btn btn-primary" href="/money/payment">Пополнить счет</a>
+        </div>
+        <div class="col-4">
+            <canvas id="myChart" width="200"></canvas>
         </div>
     </div>
 
@@ -41,10 +44,18 @@
             </tr>
             <tr>
                 <td>USDRUBTOM</td>
-                <td>66.23</td>
-                <td>62.12</td>
-                <td>24</td>
-                <td>134501</td>
+                <td>60.23</td>
+                <td>61.12</td>
+                <td>6</td>
+                <td>36138</td>
+                <td>942.13</td>
+            </tr>
+            <tr>
+                <td>EURRUB_TOM</td>
+                <td>66.40</td>
+                <td>67.63</td>
+                <td>8</td>
+                <td>53130</td>
                 <td>1034.56</td>
             </tr>
         </table>
@@ -56,6 +67,45 @@
 
 <!-- Bootstrap core JavaScript -->
 <div th:replace="inc/js.inc::js"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script>
+    const data = {
+        labels: ['Рубль', 'EURRUB_TOM', 'USDRUB_TOM',  'Остальное'],
+        datasets: [{
+            label: 'Структура портфеля клиента, %',
+            data: [63, 16, 21, 0],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(146,146,146)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: 'Структура портфеля клиента, %',
+                    padding: 0
+                }
+            }
+        }
+    };
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    chart = new Chart(ctx, config);
+</script>
 
 </body>
 
